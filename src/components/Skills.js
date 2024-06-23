@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useTrail, animated } from 'react-spring';
+import { useTrail, animated, config } from 'react-spring';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -10,19 +10,37 @@ const fadeIn = keyframes`
 const SkillsWrapper = styled(animated.div)`
   padding: 50px;
   animation: ${fadeIn} 1s ease-in;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
 `;
 
 const SkillCategory = styled(animated.div)`
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+`;
+
+const CategoryTitle = styled.h3`
+  color: #ffeaa7;
+  margin-bottom: 15px;
 `;
 
 const SkillList = styled(animated.ul)`
   list-style-type: none;
   padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 const SkillItem = styled(animated.li)`
-  margin-bottom: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.3);
+  }
 `;
 
 const skills = {
@@ -41,8 +59,9 @@ const Skills = () => {
     );
 
     const trail = useTrail(allSkills.length, {
-        from: { opacity: 0, transform: 'translateY(20px)' },
-        to: { opacity: 1, transform: 'translateY(0)' },
+        from: { opacity: 0, transform: 'scale(0.8)' },
+        to: { opacity: 1, transform: 'scale(1)' },
+        config: config.wobbly,
     });
 
     return (
@@ -50,7 +69,7 @@ const Skills = () => {
             <h2>My Skills</h2>
             {categories.map(category => (
                 <SkillCategory key={category}>
-                    <h3>{category}</h3>
+                    <CategoryTitle>{category}</CategoryTitle>
                     <SkillList>
                         {trail.map((props, index) => {
                             const { category: skillCategory, skill } = allSkills[index];

@@ -9,7 +9,7 @@ const fadeIn = keyframes`
 `;
 
 const Nav = styled(animated.nav)`
-  background-color: #333;
+  background-color: #0E0E21;
   color: white;
   padding: 1rem;
   animation: ${fadeIn} 1s ease-in;
