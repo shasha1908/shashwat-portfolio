@@ -83,11 +83,6 @@ const projects = [
         description: "Built and managed APIs using Sails.js framework, integrated weather APIs, and developed a user interface for clients to view products and services.",
         period: "Nov 2019 - Sept 2020"
     },
-    {
-        title: "NOTION",
-        description: "Designed a full technology stack for an inter-college tech fest website using Java, Node.js, and Angular.js, used by over 20K students. Features included online registration, payment gateway, and responsive information.",
-        github: "https://github.com/yourusername/notion-project"
-    },
 ];
 
 const Projects = () => {
