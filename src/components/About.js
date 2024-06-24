@@ -100,6 +100,7 @@ const About = () => {
                 <SocialIconsWrapper style={iconProps}>
                     <SocialIcon url="https://www.linkedin.com/in/shashwat-bhatt/" target="_blank" rel="noopener noreferrer" />
                     <SocialIcon url="https://x.com/Shashwat_Bhatt_" network="x" bgColor="#000000" target="_blank" rel="noopener noreferrer" />
+                    <SocialIcon url="https://github.com/shasha1908" network="github" bgColor="#000000" target="_blank" rel="noopener noreferrer" />
                 </SocialIconsWrapper>
             </ContentSection>
             <ImageSection style={imageProps}>
