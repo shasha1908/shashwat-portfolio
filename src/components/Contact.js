@@ -81,7 +81,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = e.target;
     fetch('/', {
       method: 'POST',
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
