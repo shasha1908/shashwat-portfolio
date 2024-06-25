@@ -73,65 +73,73 @@ const SubmitButton = styled(animated.button)`
 `;
 
 const Contact = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    fetch('/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+      .then(() => console.log('Form successfully submitted'))
+      .catch((error) => alert(error));
+  };
 
-    const formProps = useSpring({
-        from: { opacity: 0, transform: 'translateY(50px)' },
-        to: { opacity: 1, transform: 'translateY(0)' },
-        config: config.wobbly,
-    });
+  const formProps = useSpring({
+    from: { opacity: 0, transform: 'translateY(50px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    config: config.wobbly,
+  });
 
-    const inputProps = useSpring({
-        from: { opacity: 0, transform: 'translateX(-50px)' },
-        to: { opacity: 1, transform: 'translateX(0)' },
-        config: config.wobbly,
-    });
+  const inputProps = useSpring({
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    to: { opacity: 1, transform: 'translateX(0)' },
+    config: config.wobbly,
+  });
 
-    return (
-        <ContactWrapper style={formProps}>
-            <h2>Get in Touch</h2>
-            <ContactForm onSubmit={handleSubmit}>
-                <Input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    style={inputProps}
-                />
-                <Input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    style={inputProps}
-                />
-                <TextArea
-                    name="message"
-                    placeholder="Your Message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    style={inputProps}
-                />
-                <SubmitButton type="submit" style={useSpring({ ...inputProps, delay: 400 })}>
-                    Send Message
-                </SubmitButton>
-            </ContactForm>
-        </ContactWrapper>
-    );
+  return (
+    <ContactWrapper style={formProps}>
+      <h2>Get in Touch</h2>
+      <ContactForm onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <Input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          style={inputProps}
+        />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          style={inputProps}
+        />
+        <TextArea
+          name="message"
+          placeholder="Your Message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+          style={inputProps}
+        />
+        <SubmitButton type="submit" style={useSpring({ ...inputProps, delay: 400 })}>
+          Send Message
+        </SubmitButton>
+      </ContactForm>
+    </ContactWrapper>
+  );
 };
 
 export default Contact;
