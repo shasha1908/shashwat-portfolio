@@ -72,8 +72,27 @@ const SubmitButton = styled(animated.button)`
   }
 `;
 
+const Message = styled.div`
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+`;
+
+const SuccessMessage = styled(Message)`
+  background-color: #d4edda;
+  color: #155724;
+`;
+
+const ErrorMessage = styled(Message)`
+  background-color: #f8d7da;
+  color: #721c24;
+`;
+
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -81,13 +100,23 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.target;
     fetch('/', {
       method: 'POST',
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString()
+      body: new URLSearchParams({
+        'form-name': form.getAttribute('name'),
+        ...formData
+      }).toString()
     })
-      .then(() => console.log('Form successfully submitted'))
-      .catch((error) => alert(error));
+      .then(() => {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch((error) => {
+        setStatus('error');
+        console.error(error);
+      });
   };
 
   const formProps = useSpring({
@@ -137,6 +166,12 @@ const Contact = () => {
           Send Message
         </SubmitButton>
       </ContactForm>
+      {status === 'success' && (
+        <SuccessMessage>Message sent successfully!</SuccessMessage>
+      )}
+      {status === 'error' && (
+        <ErrorMessage>There was an error sending your message. Please try again.</ErrorMessage>
+      )}
     </ContactWrapper>
   );
 };
