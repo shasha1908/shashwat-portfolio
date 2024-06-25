@@ -101,11 +101,11 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    fetch('/', {
-      method: 'POST',
+    fetch("/", {
+      method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
-        'form-name': form.getAttribute('name'),
+        "form-name": form.getAttribute("name"),
         ...formData
       }).toString()
     })
@@ -134,7 +134,13 @@ const Contact = () => {
   return (
     <ContactWrapper style={formProps}>
       <h2>Get in Touch</h2>
-      <ContactForm onSubmit={handleSubmit} name="contact" method="POST" netlify>
+      <ContactForm
+        name="contact"
+        method="post"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+      >
         <input type="hidden" name="form-name" value="contact" />
         <Input
           type="text"
