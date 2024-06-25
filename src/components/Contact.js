@@ -134,7 +134,7 @@ const Contact = () => {
   return (
     <ContactWrapper style={formProps}>
       <h2>Get in Touch</h2>
-      <ContactForm onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true">
+      <ContactForm onSubmit={handleSubmit} name="contact" method="POST" netlify>
         <input type="hidden" name="form-name" value="contact" />
         <Input
           type="text"
