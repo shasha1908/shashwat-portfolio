@@ -58,7 +58,10 @@ const NavList = styled.ul`
   }
 `;
 
-const NavItem = styled.li``;
+const NavItem = styled.li`
+  display: flex;
+  align-items: center;
+`;
 
 const NavLink = styled(Link)`
   color: ${props => props.$isActive ? '#64ffda' : '#ccd6f6'};
@@ -123,9 +126,17 @@ const ResumeButton = styled.a`
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s ease;
+  margin-left: 10px;
+  display: inline-block;
 
   &:hover {
     background: rgba(100, 255, 218, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 10px;
+    text-align: center;
   }
 `;
 

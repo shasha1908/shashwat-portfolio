@@ -149,7 +149,7 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const ProfileImage = styled(animated.img)`
+const ProfileImage = styled.img`
   max-width: 350px;
   width: 100%;
   height: auto;
@@ -158,6 +158,7 @@ const ProfileImage = styled(animated.img)`
   z-index: 1;
   filter: grayscale(20%);
   transition: all 0.3s ease;
+  object-fit: cover;
 
   &:hover {
     filter: grayscale(0%);
